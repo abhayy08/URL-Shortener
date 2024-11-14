@@ -14,6 +14,7 @@ app.use('/api', urlRoutes);
 
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
+        console.log("MongoDB Connected");
         app.listen(process.env.PORT, () => console.log("Server started on http://localhost:3000"));
     })
     .catch((error) => console.error("MongoDB connection error:", error));

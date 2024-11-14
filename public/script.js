@@ -23,6 +23,16 @@ function displayUrl(shortUrl, originalUrl) {
     urlList.appendChild(listItem);
 }
 
-function getAllUrls(){
-    
+function getAllUrls() {
+    fetch('/api/urls')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(item => {
+                displayUrl(item.shortId, item.originalUrl)
+            });
+        })
+        .catch(error => console.error("Error:", error));
+
 }
+
+getAllUrls()

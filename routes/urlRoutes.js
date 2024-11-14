@@ -2,6 +2,17 @@ const express = require('express');
 const Url = require('../models/Url');
 const router = express.Router();
 
+router.get('/urls', async (req, res) => {
+    try {
+        let urls = await Url.find();
+        res.json(urls);
+    } catch (error) {
+        res.status(500).json(
+            { error }
+        )
+    }
+})
+
 router.post('/shorten', async (req, res) => {
     const { originalUrl } = req.body;
     if (!originalUrl) return res.status(400).json({ message: "Invalid URL" });
@@ -26,8 +37,8 @@ router.get('/:shortUrl', async (req, res) => {
     }
 });
 
-router.get('/allUrl',async(req,res)=>{
-    
+router.get('/allUrl', async (req, res) => {
+
 })
 
 module.exports = router;
